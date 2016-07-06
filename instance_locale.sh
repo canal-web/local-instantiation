@@ -114,8 +114,7 @@ if [[ $CMS != false && -f "cms/${CMS}.sh" ]]; then
     source "cms/${CMS}.sh"
 fi
 
-# ${LOCAL_DIR}bin/get_db_dist.bash
+${LOCAL_DIR}bin/get_db_dist.bash
 
 cd ${LOCAL_DIR}web && $COMPOSER update
-#site ${SITE_NAME} && skin ${SKIN_NAME} && watcha
 echo "The end."
