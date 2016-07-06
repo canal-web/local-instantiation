@@ -26,7 +26,7 @@ LOCAL_HOST='localhost'
 
 # Temp path (for tmp backups)
 
-TMP_PATH="/media/fabio/Stock/tmp"
+TMP_PATH="/tmp"
 
 #Distant server
 
