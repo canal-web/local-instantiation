@@ -12,6 +12,10 @@ LOCAL_GROUP=$LOCAL_USER
 
 PATH_LOCAL_SITES='/var/www/vhosts/'
 
+# Suffix for the site folder
+
+SUFFIX_SITENAME=''
+
 # Local database user
 
 LOCAL_USER_DB='root'

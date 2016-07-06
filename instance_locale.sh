@@ -52,7 +52,7 @@ for f in $VAR_FILES; do
 done
 
 # Create needed directories
-LOCAL_DIR="${PATH_LOCAL_SITES}${SITE_NAME}/"
+LOCAL_DIR="${PATH_LOCAL_SITES}${SITE_NAME}${SUFFIX_SITENAME}/"
 if [[ ! -d $LOCAL_DIR ]]; then
     sudo mkdir -p "${LOCAL_DIR}web"
     sudo chown -R ${LOCAL_USER}.${LOCAL_GROUP} ${LOCAL_DIR}
