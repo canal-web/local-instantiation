@@ -10,7 +10,7 @@ do
 done
 
 # Copy media files
-DISTANT_FILES="/var/www/vhosts/${SITE_NAME}.kanal-web.com/httpdocs/media"
+DISTANT_FILES="/var/www/vhosts/${DB_NAME}.kanal-web.com/httpdocs/media"
 
 $RSYNC -a --no-o --no-g -z -e ssh --delete --stats $SSH_USER:$DISTANT_FILES $FILES_FOLDER
 sudo chmod -R 777 $FILES_FOLDER/media

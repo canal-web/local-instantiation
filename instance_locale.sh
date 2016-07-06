@@ -35,6 +35,12 @@ done
 
 shift $((OPTIND-1))
 SITE_NAME=$1
+SOURCE_NAME=$SITE_NAME
+
+# Change source name if provided
+if [[ $ORIGINAL_GIT != false ]]; then
+    SOURCE_NAME=$ORIGINAL_GIT
+fi
 
 # Define default variables (you must duplicate the files with a "local." prefix to rewrite them)
 for f in $VAR_FILES; do
@@ -92,6 +98,9 @@ cat "templates/get_db_dist.bash" | sed \
 -e "s,DISTANT_PASSWD_DB,${DISTANT_PASSWD_DB}," \
 -e "s,LOCAL_PASSWD_DB,${LOCAL_PASSWD_DB}," \
 -e "s,LOCALDBUSERTOKEN,${LOCAL_USER_DB}," \
+-e "s,DISTANT_SERVER,${DISTANT_SERVER}," \
+-e "s,DISTANT_DB_NAME,${SOURCE_NAME}," \
+-e "s,DISTANT_DB_USER,${SOURCE_NAME}," \
 -e "s,TMP_PATH,${TMP_PATH}," \
  > "${LOCAL_DIR}bin/get_db_dist.bash"
 chmod +x "${LOCAL_DIR}bin/get_db_dist.bash"
@@ -103,11 +112,8 @@ fi
 echo "Please check the generated get_db script."
 
 # Git clone
-if [[ $ORIGINAL_GIT == false ]]; then
-    git clone ${DISTANT_USER}@${DISTANT_SERVER}:/var/git/${SITE_NAME} ${LOCAL_DIR}web/
-else
-    git clone ${DISTANT_USER}@${DISTANT_SERVER}:/var/git/${ORIGINAL_GIT} ${LOCAL_DIR}web/
-fi
+git clone ${DISTANT_USER}@${DISTANT_SERVER}:/var/git/${SOURCE_NAME} ${LOCAL_DIR}web/
+
 
 # Call instructions for a specific CMS
 if [[ $CMS != false && -f "cms/${CMS}.sh" ]]; then
