@@ -86,9 +86,11 @@ fi
 sudo service apache2 reload
 echo "The apache conf file is set up, now reloading apache service..."
 
+DB_NAME=$(echo "$SOURCE_NAME" | sed 's/[\._-]//g')
 # But we also need to create a database
-mysql -u${LOCAL_USER_DB} -p${LOCAL_PASSWD_DB} -e "CREATE DATABASE IF NOT EXISTS $SITE_NAME;"
+mysql -u${LOCAL_USER_DB} -p${LOCAL_PASSWD_DB} -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
 echo "Database created."
+
 
 # And generate the get db script!
 cat "templates/get_db_dist.bash" | sed \
@@ -99,8 +101,8 @@ cat "templates/get_db_dist.bash" | sed \
 -e "s,LOCAL_PASSWD_DB,${LOCAL_PASSWD_DB}," \
 -e "s,LOCALDBUSERTOKEN,${LOCAL_USER_DB}," \
 -e "s,DISTANT_SERVER,${DISTANT_SERVER}," \
--e "s,DISTANT_DB_NAME,${SOURCE_NAME}," \
--e "s,DISTANT_DB_USER,${SOURCE_NAME}," \
+-e "s,DISTANT_DB_NAME,${DB_NAME}," \
+-e "s,DISTANT_DB_USER,${DB_NAME}," \
 -e "s,TMP_PATH,${TMP_PATH}," \
  > "${LOCAL_DIR}bin/get_db_dist.bash"
 chmod +x "${LOCAL_DIR}bin/get_db_dist.bash"
