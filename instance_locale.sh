@@ -95,7 +95,8 @@ echo "Database created."
 # And generate the get db script!
 cat "templates/get_db_dist.bash" | sed \
 -e "s,ARG,${SITE_NAME}," \
--e "s,LOCAL_USER,${LOCAL_USER}," \
+-e "s,__DISTANT_USER__,${DISTANT_USER}," \
+-e "s,__LOCAL_USER__,${LOCAL_USER}," \
 -e "s,TOKENSITEBASE,${LOCAL_DIR}web," \
 -e "s,DISTANT_PASSWD_DB,${DISTANT_PASSWD_DB}," \
 -e "s,LOCAL_PASSWD_DB,${LOCAL_PASSWD_DB}," \

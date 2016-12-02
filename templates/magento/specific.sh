@@ -14,4 +14,4 @@ DISTANT_FILES="/var/www/vhosts/${DB_NAME}.kanal-web.com/httpdocs/media"
 
 $RSYNC -a --no-o --no-g -z -e ssh --delete --stats $SSH_USER:$DISTANT_FILES $FILES_FOLDER
 sudo chmod -R 777 $FILES_FOLDER/media
-sudo chown -R $CURRENT_USER.$CURRENT_USER $FILES_FOLDER/media
+sudo chown -R $LOCAL_USER.$LOCAL_USER $FILES_FOLDER/media
